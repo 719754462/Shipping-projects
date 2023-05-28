@@ -14,13 +14,13 @@ import javax.jms.JMSException;
 public class ActiveApplication {
 
     public static void main(String[] args) throws JMSException, MWException {
-//        Queue_Produce x=new Queue_Produce();
-//        x.produce();
+        Queue_Produce x=new Queue_Produce();
+        x.produce();
 //        Queue_Consume y=new Queue_Consume();
 //        y.consume();
 //        SpringApplication.run(ActiveApplication.class, args);
-        matlab_test exp =new matlab_test();
-        exp.test();
+//        matlab_test exp =new matlab_test();
+//        exp.test();
     }
 
 }

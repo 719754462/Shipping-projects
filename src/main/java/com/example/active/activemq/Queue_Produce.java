@@ -3,6 +3,7 @@ package com.example.active.activemq;
 import org.apache.activemq.ActiveMQConnectionFactory;
 
 import javax.jms.*;
+import java.util.Random;
 
 public class Queue_Produce {
     public static final String ACTIVEMQ_URL = "tcp://127.0.0.1:61616";
@@ -21,9 +22,10 @@ public class Queue_Produce {
         // 5. 创建消息的生产者
         MessageProducer producer = session.createProducer(queue);
         // 6. 发送消息
+        Random random =new Random(5);
         for (int i = 0; i < 1000; i++) {
             // 6.1 创建消息
-            TextMessage textMessage = session.createTextMessage("msg信息：" + i + ":hello world");
+            TextMessage textMessage = session.createTextMessage("" + random.nextInt(100) );
             // 6.2 将消息发送到MQ
             producer.send(textMessage);
         }
