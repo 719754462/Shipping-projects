@@ -1,5 +1,6 @@
 package com.example.active.mysql.controller;
 
+import com.example.active.activemq.Queue_Consume;
 import com.example.active.activemq.Queue_Produce;
 import com.example.active.mysql.dao.UserRepository;
 import com.example.active.mysql.pojo.User;
@@ -18,9 +19,8 @@ public class MysqlController {
 
     @GetMapping("/users")
     public List<User> findAll() throws JMSException {
-        Queue_Produce pro =new Queue_Produce();
+//        Queue_Consume con =new Queue_Consume();
         List<User> result = new ArrayList<>();
-        List<String> strList = new ArrayList<>();
         userRepository.findAll().forEach((user) -> {
             result.add(user);
 //            strList.add(user.getName());
@@ -28,7 +28,7 @@ public class MysqlController {
 //            strList.add(user.getBirth());
 //            strList.add(user.getBirthaddr());
         });
-//        pro.produce(strList);
+//        con.consume();
         return result;
     }
 }

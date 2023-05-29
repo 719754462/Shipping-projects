@@ -19,7 +19,7 @@ public class Queue_Consume {
 
     //public static CopyOnWriteArraySet<Connection> ConsumerConnectionSet = new CopyOnWriteArraySet<Connection>();
 
-    public void consume() throws JMSException {
+    public List<String> consume() throws JMSException {
         //1. 创建ConnectionFactory
         //ActiveMQConnectionFactory connectionFactory = new ActiveMQConnectionFactory(username,password,url);
         ActiveMQConnectionFactory connectionFactory = new ActiveMQConnectionFactory(ACTIVEMQ_URL);
@@ -44,7 +44,7 @@ public class Queue_Consume {
                     String messageText = ((TextMessage) message).getText();
                     result.add(messageText);
 //                    System.out.println(result.size());
-                    if(result.size()>=30000){
+                    if(result.size()>=1000){
                         consumer.close();
                         session.close();
                         connection.close();
@@ -55,6 +55,7 @@ public class Queue_Consume {
                 }
             }
         });
+        return result;
 
 //        while(index<result.size()){
 //            System.out.println(result);

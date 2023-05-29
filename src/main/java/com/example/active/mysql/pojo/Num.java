@@ -52,17 +52,12 @@ public class Num {
         return label;
     }
 
-    public void setLabel(String birthaddr) {
-        this.label = birthaddr;
+    public void setLabel(String label) {
+        this.label = label;
     }
 
     @Override
     public String toString() {
-        return "User{" +
-                "name='" + one + '\'' +
-                ", sex='" + two + '\'' +
-                ", birth='" + three + '\'' +
-                ", birthaddr='" + four + '\'' +
-                '}';
+        return one+" "+two+" "+three+" "+four+" "+label;
     }
 }

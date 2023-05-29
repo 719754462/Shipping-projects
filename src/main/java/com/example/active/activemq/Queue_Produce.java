@@ -1,8 +1,12 @@
 package com.example.active.activemq;
 
+import com.example.active.mysql.controller.NumController;
+import com.example.active.mysql.dao.NumRepository;
 import org.apache.activemq.ActiveMQConnectionFactory;
+import org.springframework.web.bind.annotation.GetMapping;
 
 import javax.jms.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -24,9 +28,11 @@ public class Queue_Produce {
         MessageProducer producer = session.createProducer(queue);
         // 6. 发送消息
         int i=0;
+        NumController xx=new NumController();
         while(i<strList.size()){
             TextMessage textMessage = session.createTextMessage(strList.get(i));
             producer.send(textMessage);
+            i++;
         }
 //        Random random =new Random(5);
 //        for (int i = 0; i < 1000; i++) {
