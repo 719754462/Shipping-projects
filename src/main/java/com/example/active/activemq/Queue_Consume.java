@@ -3,7 +3,11 @@ package com.example.active.activemq;
 
 import javax.jms.*;
 
+import com.example.active.mysql.pojo.User;
 import org.apache.activemq.ActiveMQConnectionFactory;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Queue_Consume {
     //监听注册,指定需要监听得队列
@@ -29,21 +33,33 @@ public class Queue_Consume {
         Destination destination = session.createQueue(QUEUE_NAME);
         //6. 创建一个消费者
         MessageConsumer consumer = session.createConsumer(destination);
+        // 创建接收数组
+        List<String> result = new ArrayList<>();
         //7. 创建一个监听器
         //ConsumerConnectionSet.add(connection);
         consumer.setMessageListener(new MessageListener() {
+
             public void onMessage(Message message) {
                 try {
                     String messageText = ((TextMessage) message).getText();
-//                        此处应想办法改为bytemessage
+                    result.add(messageText);
+//                    System.out.println(result.size());
+                    if(result.size()>=30000){
+                        consumer.close();
+                        session.close();
+                        connection.close();
+                    }
                     System.out.println("接收消息  = [" + messageText + "]");
-
                 } catch (JMSException e) {
                     e.printStackTrace();
                 }
             }
         });
-//            目前的话调用会直接默认清空队列
+
+//        while(index<result.size()){
+//            System.out.println(result);
+//        }
+//            目前的话调用会直接结束
 //            consumer.close();
 //            session.close();
 //            connection.close();
